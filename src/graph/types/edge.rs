@@ -2,10 +2,12 @@
 
 use crate::graph::traits::edge::Edge as EdgeTrait;
 use crate::graph::traits::graph_obj::GraphObject;
-use crate::graph::types::edgetype::EdgeType;
+use crate::graph::types::misc::EdgeType;
+use crate::graph::types::misc::GraphContent;
+use crate::graph::types::misc::GraphObjects;
 use crate::graph::types::node::Node;
 use std::collections::HashMap;
-use std::collections::HashSet;
+//use std::collections::HashSet;
 use std::fmt;
 
 use std::hash::{Hash, Hasher};
@@ -28,11 +30,9 @@ pub struct Edge {
 }
 
 /// short hand for edge set
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct Edges<'a> {
-    /// edge set content
-    pub edge_set: HashSet<&'a Edge>,
-}
+pub type Edges = GraphObjects<Edge>;
+pub type E<'a> = GraphContent<'a, Edge>;
+
 impl fmt::Display for Edge {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let eid = &self.info.edge_id;
@@ -189,6 +189,7 @@ impl Edge {
         }
     }
 }
+
 #[cfg(test)]
 mod tests {
 

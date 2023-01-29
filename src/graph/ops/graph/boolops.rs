@@ -9,7 +9,7 @@ use std::collections::HashSet;
 
 /// check if graph is empty
 pub fn is_empty<G: Graph>(g: &G) -> bool {
-    g.vertices().is_empty()
+    g.vertices().set.is_empty()
 }
 
 /// Check if given graph object is in graph
@@ -25,7 +25,7 @@ pub fn is_empty<G: Graph>(g: &G) -> bool {
 /// ```
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::ops::graph::boolops::is_in;
 /// use std::collections::HashSet;
@@ -43,7 +43,6 @@ pub fn is_empty<G: Graph>(g: &G) -> bool {
 /// is_in(&g, &e1); // true
 /// is_in(&g, &n5); // false
 /// ```
-
 pub fn is_in<G, T>(g: &G, element: &T) -> bool
 where
     G: Graph,
@@ -66,7 +65,7 @@ where
         }
         ns.insert(eend);
     }
-    for n in g.vertices().difference(&ns) {
+    for n in g.vertices().set.difference(&ns) {
         if n.id() == eid {
             return true;
         }
@@ -88,7 +87,7 @@ where
 /// ```
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::ops::graph::boolops::is_adjacent_of;
 /// use std::collections::HashSet;
@@ -141,7 +140,7 @@ where
 /// ```
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::ops::graph::boolops::is_node_incident;
 /// use std::collections::HashSet;
@@ -193,7 +192,7 @@ where
 /// ```
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::ops::graph::boolops::is_neighbor_of;
 /// use std::collections::HashSet;
@@ -239,8 +238,8 @@ mod tests {
     //
     use crate::graph::traits::edge::Edge as EdgeTrait;
     use crate::graph::types::edge::Edge;
-    use crate::graph::types::edgetype::EdgeType;
     use crate::graph::types::graph::Graph;
+    use crate::graph::types::misc::EdgeType;
     use crate::graph::types::node::Node;
     use std::collections::HashMap;
 

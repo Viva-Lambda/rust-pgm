@@ -20,7 +20,7 @@ use std::collections::HashSet;
 /// # Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::graph::nodeops::neighbors_of;
@@ -104,7 +104,7 @@ where
 /// # Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::graph::nodeops::vertex_by_id;
@@ -158,8 +158,8 @@ mod tests {
 
     use super::*;
     use crate::graph::types::edge::Edge;
-    use crate::graph::types::edgetype::EdgeType;
     use crate::graph::types::graph::Graph;
+    use crate::graph::types::misc::EdgeType;
     use crate::graph::types::node::Node;
     use std::collections::HashMap;
 

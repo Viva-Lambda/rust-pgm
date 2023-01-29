@@ -42,7 +42,7 @@ where
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::edge::Edge;
 /// use pgm_rust::graph::ops::graph::edgeops::edges_of;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use std::collections::HashMap;
@@ -95,7 +95,7 @@ where
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::edge::Edge;
 /// use pgm_rust::graph::ops::graph::edgeops::outgoing_edges_of;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use std::collections::HashMap;
@@ -150,7 +150,7 @@ where
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::edge::Edge;
 /// use pgm_rust::graph::ops::graph::edgeops::incoming_edges_of;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use std::collections::HashMap;
@@ -204,7 +204,7 @@ where
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::edge::Edge;
 /// use pgm_rust::graph::ops::graph::edgeops::edges_by_vertices;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use std::collections::HashMap;
@@ -271,7 +271,7 @@ where
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::edge::Edge;
 /// use pgm_rust::graph::ops::graph::edgeops::edge_by_id;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
 /// use std::collections::HashMap;
@@ -318,8 +318,8 @@ mod tests {
     use crate::graph::traits::edge::Edge as EdgeTrait;
     use crate::graph::traits::graph::Graph as GraphTrait;
     use crate::graph::types::edge::Edge;
-    use crate::graph::types::edgetype::EdgeType;
     use crate::graph::types::graph::Graph;
+    use crate::graph::types::misc::EdgeType;
     use crate::graph::types::node::Node;
     use std::collections::HashMap;
 

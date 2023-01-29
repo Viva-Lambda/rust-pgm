@@ -41,7 +41,7 @@ pub fn to_adjacencylist<'a, G: Graph>(g: &'a G) -> HashMap<&'a str, Option<HashS
 /// # Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::ops::graph::miscops::to_adjmat;
 /// use pgm_rust::graph::traits::graph_obj::GraphObject;
@@ -199,8 +199,8 @@ where
 mod tests {
     use super::*;
     use crate::graph::types::edge::Edge;
-    use crate::graph::types::edgetype::EdgeType;
     use crate::graph::types::graph::Graph;
+    use crate::graph::types::misc::EdgeType;
     use crate::graph::types::node::Node;
     use std::collections::HashMap;
     use std::collections::HashSet;

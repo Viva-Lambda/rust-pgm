@@ -5,7 +5,9 @@ use crate::graph::traits::edge::Edge as EdgeTrait;
 use crate::graph::traits::graph::Graph as GraphTrait;
 use crate::graph::traits::graph_obj::GraphObject;
 use crate::graph::types::edge::Edge;
+use crate::graph::types::edge::E;
 use crate::graph::types::node::Node;
+use crate::graph::types::node::V;
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::fmt;
@@ -183,7 +185,7 @@ impl Graph {
     }
 }
 impl GraphTrait for Graph {
-    fn vertices(&self) -> HashSet<&Node> {
+    fn vertices<'a>(&'a self) -> V<'a> {
         let mut hset: HashSet<&Node> = HashSet::new();
         let (es, ns) = &self.gdata;
         for e in es {
@@ -193,15 +195,15 @@ impl GraphTrait for Graph {
         for n in ns {
             hset.insert(n);
         }
-        hset
+        V::new(hset)
     }
-    fn edges(&self) -> HashSet<&Edge> {
+    fn edges<'a>(&'a self) -> E<'a> {
         let mut hset: HashSet<&Edge> = HashSet::new();
         let (es, _) = &self.gdata;
         for e in es {
             hset.insert(e);
         }
-        hset
+        E::new(hset)
     }
 }
 

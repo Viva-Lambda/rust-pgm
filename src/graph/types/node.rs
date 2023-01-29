@@ -3,6 +3,8 @@
 // call the GraphObject trait
 pub use crate::graph::traits::graph_obj::GraphObject;
 pub use crate::graph::traits::node::Node as NodeTrait;
+use crate::graph::types::misc::GraphContent;
+use crate::graph::types::misc::GraphObjects;
 
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -18,11 +20,6 @@ pub struct Node {
 }
 
 /// Short hand for set of nodes
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct Vertices<'a> {
-    /// node set field
-    pub vertex_set: HashSet<&'a Node>,
-}
 
 impl Node {
     /// constructor for Node object
@@ -81,6 +78,9 @@ impl GraphObject for Node {
 }
 
 impl NodeTrait for Node {}
+
+pub type Vertices = GraphObjects<Node>;
+pub type V<'a> = GraphContent<'a, Node>;
 
 #[cfg(test)]
 mod tests {

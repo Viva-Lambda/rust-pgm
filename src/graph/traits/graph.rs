@@ -1,8 +1,7 @@
 // graph trait
 use crate::graph::traits::graph_obj::GraphObject;
-use crate::graph::types::edge::Edge;
-use crate::graph::types::node::Node;
-use std::collections::HashSet;
+use crate::graph::types::edge::E;
+use crate::graph::types::node::V;
 
 /// Promotes an object to being a graph.
 /// This trait is the gateway for using all the graph related operations in
@@ -10,10 +9,10 @@ use std::collections::HashSet;
 pub trait Graph: GraphObject {
     /// outputs a [Node] set.
     /// a [Node] can constructed anything that implements the Node trait
-    fn vertices(&self) -> HashSet<&Node>;
+    fn vertices<'a>(&'a self) -> V<'a>;
 
     /// outputs an [Edge] set.
     /// an [Edge] can constructed anything that implements the Edge trait
-    fn edges(&self) -> HashSet<&Edge>;
+    fn edges<'a>(&'a self) -> E<'a>;
 }
 //

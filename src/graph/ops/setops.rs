@@ -4,10 +4,11 @@ use crate::graph::traits::edge::Edge;
 use crate::graph::traits::graph::Graph as GraphTrait;
 use crate::graph::traits::node::Node as NodeTrait;
 use crate::graph::types::edge::Edge as EdgeT;
-use crate::graph::types::edge::Edges;
+use crate::graph::types::edge::E;
 use crate::graph::types::graph::Graph;
+use crate::graph::types::misc::GraphContent;
 use crate::graph::types::node::Node;
-use crate::graph::types::node::Vertices;
+use crate::graph::types::node::V;
 use std::collections::HashSet;
 use std::ops::{Add, Sub};
 
@@ -27,10 +28,10 @@ use std::ops::{Add, Sub};
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
-/// use pgm_rust::graph::types::node::Vertices;
+/// use pgm_rust::graph::types::node::V;
 /// use pgm_rust::graph::ops::setops::intersection_edge;
 /// use std::collections::HashSet;
 ///
@@ -47,7 +48,7 @@ use std::ops::{Add, Sub};
 /// let comp = Vertices {vertex_set: comph};
 /// einter == comp; // outputs true
 /// ```
-pub fn intersection_edge<'a, E>(a1: &'a E, a2: &'a E) -> Vertices<'a>
+pub fn intersection_edge<'a, E>(a1: &'a E, a2: &'a E) -> V
 where
     E: Edge,
 {
@@ -61,7 +62,7 @@ where
     for i in hset1.intersection(&hset2) {
         inters.insert(i.clone());
     }
-    Vertices { vertex_set: inters }
+    V::new(inters)
 }
 
 /// ## Intersection of Edge Sets
@@ -78,7 +79,7 @@ where
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
@@ -140,13 +141,16 @@ where
 /// comp.insert(&e1);
 /// einter == comp;
 /// ```
-pub fn intersection_edges<'a, T: Edge>(a1: HashSet<&'a T>, a2: HashSet<&'a T>) -> HashSet<&'a T> {
+pub fn intersection_edges<'a, T: Edge>(
+    a1: GraphContent<'a, T>,
+    a2: GraphContent<'a, T>,
+) -> GraphContent<'a, T> {
     let mut inter = HashSet::new();
     for i in a1.intersection(&a2) {
         // instead of moving the reference we copy the reference
         inter.insert(i.clone());
     }
-    inter
+    GraphContent::new(inter)
 }
 /// ## Intersection of Node Sets
 /// ### Description
@@ -162,7 +166,7 @@ pub fn intersection_edges<'a, T: Edge>(a1: HashSet<&'a T>, a2: HashSet<&'a T>) -
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::node::Node as NodeTrait;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::setops::intersection_nodes;
@@ -192,15 +196,15 @@ pub fn intersection_edges<'a, T: Edge>(a1: HashSet<&'a T>, a2: HashSet<&'a T>) -
 /// ninter == comp;
 /// ```
 pub fn intersection_nodes<'a, T: NodeTrait>(
-    a1: HashSet<&'a T>,
-    a2: HashSet<&'a T>,
-) -> HashSet<&'a T> {
+    a1: GraphContent<'a, T>,
+    a2: GraphContent<'a, T>,
+) -> GraphContent<'a, T> {
     let mut inter = HashSet::new();
-    for i in a1.intersection(&a2) {
+    for i in a1.set.intersection(&a2.set) {
         // instead of moving the reference we copy the reference
         inter.insert(i.clone());
     }
-    inter
+    GraphContent::new(inter)
 }
 /// ## Intersection of Two Graphs
 /// ### Description
@@ -216,7 +220,7 @@ pub fn intersection_nodes<'a, T: NodeTrait>(
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
@@ -311,7 +315,7 @@ pub fn intersection<'a, T: GraphTrait>(a1: &'a T, a2: &'a T) -> Graph {
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::node::Node as NodeTrait;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::setops::union_nodes;
@@ -370,7 +374,7 @@ pub fn union_nodes<'a, T: NodeTrait>(a1: HashSet<&'a T>, a2: HashSet<&'a T>) -> 
 /// ```
 /// use pgm_rust::graph::traits::edge::Edge as EdgeTrait;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::setops::union_edge;
 /// use std::collections::HashSet;
@@ -419,7 +423,7 @@ pub fn union_edge<'a, T: Edge>(a1: &'a T, a2: &'a T) -> HashSet<&'a Node> {
 /// ```
 /// use pgm_rust::graph::traits::edge::Edge as EdgeTrait;
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
@@ -498,7 +502,7 @@ pub fn union_edges<'a, T: Edge>(a1: HashSet<&'a T>, a2: HashSet<&'a T>) -> HashS
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
@@ -575,19 +579,19 @@ pub fn union_graph<'a, T: GraphTrait>(a1: &'a T, a2: &'a T) -> Graph {
     Graph::from_edge_node_refs_set(es, vs)
 }
 // overload add for union
-impl<'a> Add for Vertices<'a> {
+impl<'a> Add for V<'a> {
     type Output = Self;
-    fn add(self, other: Self) -> Self {
-        Vertices {
-            vertex_set: union_nodes(self.vertex_set, other.vertex_set),
+    fn add(&self, other: &Self) -> Self {
+        V {
+            set: union_nodes(self.set, other.set),
         }
     }
 }
-impl<'a> Add for Edges<'a> {
+impl<'a> Add for E<'a> {
     type Output = Self;
-    fn add(self, other: Self) -> Self {
-        Edges {
-            edge_set: union_edges(self.edge_set, other.edge_set),
+    fn add(&self, other: &Self) -> Self {
+        E {
+            set: union_edges(self.set, other.set),
         }
     }
 }
@@ -625,7 +629,7 @@ impl Add for Graph {
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::traits::graph::Graph as GraphTrait;
 /// use pgm_rust::graph::types::graph::Graph;
 /// use pgm_rust::graph::types::node::Node;
@@ -707,7 +711,7 @@ pub fn difference_nodes<'a, T: NodeTrait>(
 ///
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::setops::difference_edge;
 /// use std::collections::HashSet;
@@ -753,7 +757,7 @@ pub fn difference_edge<'a, T: Edge>(a1: &'a T, a2: &'a T) -> HashSet<&'a Node> {
 /// ### Example
 /// ```
 /// use pgm_rust::graph::types::edge::Edge;
-/// use pgm_rust::graph::types::edgetype::EdgeType;
+/// use pgm_rust::graph::types::misc::EdgeType;
 /// use pgm_rust::graph::types::node::Node;
 /// use pgm_rust::graph::ops::setops::difference_edges;
 /// use std::collections::HashSet;
@@ -870,8 +874,8 @@ mod tests {
     use super::*;
     use crate::graph::traits::graph::Graph as GraphTrait;
     use crate::graph::types::edge::Edge;
-    use crate::graph::types::edgetype::EdgeType;
     use crate::graph::types::graph::Graph;
+    use crate::graph::types::misc::EdgeType;
     use crate::graph::types::node::Node;
     use std::collections::HashMap;
     use std::collections::HashSet;
@@ -939,7 +943,7 @@ mod tests {
         let mut comph = HashSet::new();
         let n2 = mk_node("n2");
         comph.insert(&n2);
-        let comp = Vertices { vertex_set: comph };
+        let comp = V { set: comph };
         assert_eq!(einter, comp);
     }
     #[test]
@@ -1075,10 +1079,8 @@ mod tests {
         let e3 = mk_uedge("n20", "n40", "e3");
         let evs = vec![e1.clone(), e2.clone(), e3.clone()];
         let es = mk_edge_refs(&evs);
-        let es_g1 = Edges {
-            edge_set: g1es.clone(),
-        };
-        let es_2 = Edges { edge_set: es };
+        let es_g1 = E { set: g1es.clone() };
+        let es_2 = E { set: es };
         let eunion = es_g1 + es_2;
         let mut comph = HashSet::new();
         for e in g1es {
@@ -1086,7 +1088,7 @@ mod tests {
         }
         comph.insert(&e2);
         comph.insert(&e3);
-        let comp = Edges { edge_set: comph };
+        let comp = E { set: comph };
         assert_eq!(eunion, comp);
     }
     #[test]
@@ -1097,12 +1099,10 @@ mod tests {
         let n2 = mk_node("n20");
         let n3 = mk_node("n30");
         let nvs = vec![n1.clone(), n2.clone(), n3.clone()];
-        let ns_1 = Vertices {
-            vertex_set: mk_node_refs(&nvs),
+        let ns_1 = V {
+            set: mk_node_refs(&nvs),
         };
-        let ns_g1 = Vertices {
-            vertex_set: g1ns.clone(),
-        };
+        let ns_g1 = V { set: g1ns.clone() };
         let nunion = ns_1 + ns_g1;
         let mut comph = HashSet::new();
         for n in g1ns {
@@ -1110,7 +1110,7 @@ mod tests {
         }
         comph.insert(&n2);
         comph.insert(&n3);
-        let comp = Vertices { vertex_set: comph };
+        let comp = V { set: comph };
         assert_eq!(nunion, comp);
     }
     #[test]

@@ -2,11 +2,12 @@
 //
 use std::collections::HashMap;
 use std::fmt;
+use std::fmt::Debug;
 use std::hash::Hash;
 
 /// Promotes anything that is hashable and converted to string to a [GraphObject]
 /// This is almost exchangeable with being a [Node]
-pub trait GraphObject: fmt::Display + Hash + Eq {
+pub trait GraphObject: fmt::Display + Hash + Eq + Debug + Clone {
     /// identifier for graph object
     fn id(&self) -> &String;
     /// data that is associated to graph object

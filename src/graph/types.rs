@@ -1,7 +1,7 @@
 // graph model module declarations
 
-/// edge type such as directed, undirected
-pub mod edgetype;
+/// diverse types for objects that implement graph object trait
+pub mod misc;
 
 /// edge object implements [GraphObject] trait.
 pub mod edge;
